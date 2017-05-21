@@ -33,3 +33,10 @@ void CSocServer::OnAccept(int nErrorCode)
 
 	CSocket::OnAccept(nErrorCode);
 }
+
+CSocCom * CSocServer::GetAcceptSocCom()
+{
+	// 통신소켓을 리턴한다.
+	// 반환되는 통신 소켓은 클라이언트와 연결된다.
+	return &m_socCom;
+}

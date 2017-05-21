@@ -37,6 +37,7 @@ void CMyDialog::DoDataExchange(CDataExchange* pDX)
 
 LPARAM CMyDialog::OnAccept(UINT wParam, LPARAM lParam)
 {
+	// 클라이언트에서 접속 요청이 왔을 때
 	// 통신용 소켓을 생성한뒤
 	m_socCom = new CSocCom;
 	// 서버소켓과 통신소켓을 연결한다.
@@ -72,12 +73,14 @@ void CMyDialog::OnBnClickedButton1()
 	//서버에 접속합니다
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 
-	CString str;
-	str.Format(L"서버 생성 성공");
-	SetDlgItemText(IDC_STATIC_CONNECT, str);
-	
-//	m_socCom = NULL;
-	m_socServer.Create(5000);
+	m_socCom = NULL;
+	if (m_socServer.Create(5000))
+	{
+		CString str;
+		str.Format(L"서버 생성 성공");
+		SetDlgItemText(IDC_STATIC_CONNECT, str);
+
+	}
 	m_socServer.Listen();
 	m_socServer.Init(this->m_hWnd);
 
