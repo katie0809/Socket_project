@@ -188,6 +188,8 @@
     <ClInclude Include="ChatClient.h" />
     <ClInclude Include="ChatClientDlg.h" />
     <ClInclude Include="MyDialog.h" />
+    <ClInclude Include="OmokWnd.h" />
+    <ClInclude Include="OmokWndApp.h" />
     <ClInclude Include="puzzle_gameDlg.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SocCom.h" />
@@ -199,6 +201,8 @@
     <ClCompile Include="ChatClient.cpp" />
     <ClCompile Include="ChatClientDlg.cpp" />
     <ClCompile Include="MyDialog.cpp" />
+    <ClCompile Include="OmokWnd.cpp" />
+    <ClCompile Include="OmokWndApp.cpp" />
     <ClCompile Include="puzzle_gameDlg.cpp" />
     <ClCompile Include="SocCom.cpp" />
     <ClCompile Include="SocServer.cpp" />
