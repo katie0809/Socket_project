@@ -21,6 +21,8 @@ CSocCom::~CSocCom()
 
 void CSocCom::Init(HWND hWnd)
 {
+	// 메인 윈도우 포인터 받기
+
 	m_hWnd = hWnd;
 }
 
