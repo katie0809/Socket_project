@@ -48,7 +48,7 @@
     <ClInclude Include="OmokWnd.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="OmokWndApp.h">
+    <ClInclude Include="OmokDlg.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -74,10 +74,10 @@
     <ClCompile Include="SocServer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="OmokWndApp.cpp">
+    <ClCompile Include="OmokWnd.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="OmokWnd.cpp">
+    <ClCompile Include="OmokDlg.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

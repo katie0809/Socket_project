@@ -6,7 +6,7 @@
 #include<afxwin.h>
 
 
-class OmokWnd : public CFrameWnd {
+class OmokWnd : public CWnd {
 public:
 	OmokWnd();
 	int x, y;
@@ -15,11 +15,12 @@ public:
 	int whoWin; // 게임이 끝났는지 확인
 public:
 	void OmokInner();
+	void Reset();
 protected:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void OnClose();
 	afx_msg void OnPaint();
-	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
+	afx_msg void OnLButtonUp(UINT nFlags,CPoint point);
 
 	DECLARE_MESSAGE_MAP()
 
