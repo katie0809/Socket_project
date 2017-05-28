@@ -6,6 +6,7 @@
 
 
 // CChatClientDlg 대화 상자
+
 class CChatClientDlg : public CDialogEx
 {
 // 생성입니다.
@@ -21,6 +22,10 @@ public:
 	protected:
 	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV 지원입니다.
 
+public:
+	//장보영 2017.05.27
+	
+	
 
 // 구현입니다.
 protected:
@@ -38,4 +43,6 @@ public:
 	class puzzle_gameDlg *m_dialog2;
 	virtual void OnOK();
 	afx_msg void OnBnClickedButton3();
+	afx_msg void OnBnClickedButton2();
+	afx_msg void OnBnClickedButtonOmok();
 };
