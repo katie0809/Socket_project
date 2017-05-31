@@ -74,7 +74,7 @@ BEGIN_MESSAGE_MAP(CChatClientDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_BUTTON1, &CChatClientDlg::OnBnClickedButton1)
-	ON_BN_CLICKED(IDC_BUTTON3, &CChatClientDlg::OnBnClickedButton3)
+	ON_BN_CLICKED(IDC_BUTTON_PUZZLE, &CChatClientDlg::OnBnClickedButtonPuzzle)
 	ON_BN_CLICKED(IDC_BUTTON2, &CChatClientDlg::OnBnClickedButton2)
 	ON_BN_CLICKED(IDC_BUTTON_OMOK, &CChatClientDlg::OnBnClickedButtonOmok)
 END_MESSAGE_MAP()
@@ -107,7 +107,7 @@ BOOL CChatClientDlg::OnInitDialog()
 		}
 	}
 
-
+	
 
 	// 이 대화 상자의 아이콘을 설정합니다.  응용 프로그램의 주 창이 대화 상자가 아닐 경우에는
 	//  프레임워크가 이 작업을 자동으로 수행합니다.
@@ -187,12 +187,14 @@ void CChatClientDlg::OnOK()
 }
 
 
-void CChatClientDlg::OnBnClickedButton3()
+void CChatClientDlg::OnBnClickedButtonPuzzle()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	m_dialog2 = new puzzle_gameDlg(this);
-	m_dialog2->Create(puzzle_gameDlg::IDD);
-	m_dialog2->ShowWindow(SW_SHOW);
+	ButtonState = 1;
+	m_dialog = new CMyDialog(this);
+	m_dialog->Create(CMyDialog::IDD);
+	m_dialog->ShowWindow(SW_SHOW);
+
 //	m_dialog2->OnInitDialog();
 }
 
@@ -200,15 +202,25 @@ void CChatClientDlg::OnBnClickedButton3()
 void CChatClientDlg::OnBnClickedButton2()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	/* 1인용 임시
+	m_dialog2 = new puzzle_gameDlg(this);
+	m_dialog2->Create(puzzle_gameDlg::IDD);
+	m_dialog2->ShowWindow(SW_SHOW);
+	*/
 }
 
 
 void CChatClientDlg::OnBnClickedButtonOmok()
 {
-	OmokDlg omokDlg;
-	this->ShowWindow(SW_HIDE);
+	ButtonState = 2;
+	m_dialog = new CMyDialog(this);
+	m_dialog->Create(CMyDialog::IDD);
+	m_dialog->ShowWindow(SW_SHOW);
+	
+	//OmokDlg omokDlg;
+	//this->ShowWindow(SW_HIDE);
 
-	omokDlg.DoModal();
-	this->ShowWindow(SW_SHOW);
+	//omokDlg.DoModal();
+	//this->ShowWindow(SW_SHOW);
 
 }

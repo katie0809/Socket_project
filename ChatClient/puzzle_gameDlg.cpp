@@ -5,7 +5,8 @@
 #include "ChatClient.h"
 #include "puzzle_gameDlg.h"
 #include "afxdialogex.h"
-
+#include "ChatClientDlg.h"
+#include "OmokWnd.h"
 #include <stdio.h>
 #pragma warning(disable:4996)
 using namespace std;
@@ -17,6 +18,9 @@ IMPLEMENT_DYNAMIC(puzzle_gameDlg, CDialogEx)
 puzzle_gameDlg::puzzle_gameDlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(IDD_DIALOG2, pParent)
 {
+	
+	CChatClientDlg *cchatclientdlg = (CChatClientDlg*)CWnd::FindWindow(L"#32770", L"Chatserver"); // 버튼 종류 정보 가져오기
+	getStateNum = cchatclientdlg->ButtonState;
 
 }
 
@@ -314,38 +318,50 @@ BOOL puzzle_gameDlg::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 
-	// TODO:  여기에 추가 초기화 작업을 추가합니다.
-	// 시스템 메뉴에 "정보..." 메뉴 항목을 추가합니다.
+	if (getStateNum == 1) {
+		// TODO:  여기에 추가 초기화 작업을 추가합니다.
+		// 시스템 메뉴에 "정보..." 메뉴 항목을 추가합니다.
 
-	// IDM_ABOUTBOX는 시스템 명령 범위에 있어야 합니다.
-	ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX);
-	ASSERT(IDM_ABOUTBOX < 0xF000);
+		// IDM_ABOUTBOX는 시스템 명령 범위에 있어야 합니다.
+		ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX);
+		ASSERT(IDM_ABOUTBOX < 0xF000);
 
-	CMenu* pSysMenu = GetSystemMenu(FALSE);
-	if (pSysMenu != NULL)
-	{
-		BOOL bNameValid;
-		CString strAboutMenu;
-		bNameValid = strAboutMenu.LoadString(IDS_ABOUTBOX);
-		ASSERT(bNameValid);
-		if (!strAboutMenu.IsEmpty())
+		CMenu* pSysMenu = GetSystemMenu(FALSE);
+		if (pSysMenu != NULL)
 		{
-			pSysMenu->AppendMenu(MF_SEPARATOR);
-			pSysMenu->AppendMenu(MF_STRING, IDM_ABOUTBOX, strAboutMenu);
+			BOOL bNameValid;
+			CString strAboutMenu;
+			bNameValid = strAboutMenu.LoadString(IDS_ABOUTBOX);
+			ASSERT(bNameValid);
+			if (!strAboutMenu.IsEmpty())
+			{
+				pSysMenu->AppendMenu(MF_SEPARATOR);
+				pSysMenu->AppendMenu(MF_STRING, IDM_ABOUTBOX, strAboutMenu);
+			}
+
+			m_bitMain.LoadBitmapW(IDB_MAIN);
+			//m_bitMain이라는 비트맵형 변수에 IDB_MAIN이라는 리소스를 사용하도록 한다
+			m_hint.LoadBitmapW(IDB_HINT);
+			//m_hint라는 비트맵형 변수에 IDB_HINT라는 리소스를 사용하도록한다.
 		}
 
-		m_bitMain.LoadBitmapW(IDB_MAIN);
-		//m_bitMain이라는 비트맵형 변수에 IDB_MAIN이라는 리소스를 사용하도록 한다
-		m_hint.LoadBitmapW(IDB_HINT);
-		//m_hint라는 비트맵형 변수에 IDB_HINT라는 리소스를 사용하도록한다.
+		InitGame();
+		m_time = 0;
+		start_game = true;
+		return TRUE;  // return TRUE unless you set the focus to a control
+					  // 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
+	}
+	else if (getStateNum == 2) {
+		// 메모리 할당하기
+		this->omokWnd = new OmokWnd;
+
+		this->omokWnd->Create(NULL, _T("오목"), WS_CHILD | WS_VISIBLE, CRect(0, 0, 750, 650), this, 10000);
+		return FALSE;
 	}
 
-	InitGame();
-	m_time = 0;
-	start_game = true;
+	
 
-	return TRUE;  // return TRUE unless you set the focus to a control
-				  // 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
+	
 }
 
 

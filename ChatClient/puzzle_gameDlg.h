@@ -2,7 +2,7 @@
 
 
 // puzzle_gameDlg 대화 상자입니다.
-
+class OmokWnd;
 class puzzle_gameDlg : public CDialogEx
 {
 	DECLARE_DYNAMIC(puzzle_gameDlg)
@@ -24,9 +24,16 @@ public:
 	void MovePic(int iRow, int iCol, int iEmptyRow, int iEmptyCol);
 	void ClearPic(int iRow, int iCol);
 	int m_iGame[5][5];
+
+	int getStateNum; // 이전 창 버튼 정보 가져오기
 // 대화 상자 데이터입니다.
 
-	enum { IDD = IDD_DIALOG2 };
+	
+	
+	OmokWnd *omokWnd;
+
+	
+	enum { IDD = IDD_DIALOG2 , IDD10 = IDD_OMOKWND};
 
 
 protected:

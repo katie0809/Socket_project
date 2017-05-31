@@ -3,8 +3,9 @@
 #include "SocServer.h"
 #include "afxwin.h"
 
-// CMyDialog 대화 상자입니다.
 
+// CMyDialog 대화 상자입니다.
+class OmokWnd;
 class CMyDialog : public CDialogEx
 {
 	DECLARE_DYNAMIC(CMyDialog)
@@ -36,7 +37,10 @@ public:
 	void ClearPic(int iRow, int iCol);
 	int m_iGame[7][7];
 
+	int getStateNum; // 이전 창 버튼 정보 가져오기
+					 // 대화 상자 데이터입니다.
 
+	OmokWnd *omokWnd;
 
 
 // 대화 상자 데이터입니다.
@@ -60,4 +64,6 @@ public:
 	CString m_strSend;
 	virtual void OnOK();
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
+
+	
 };

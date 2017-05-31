@@ -12,6 +12,7 @@ class CChatClientDlg : public CDialogEx
 // 생성입니다.
 public:
 	CChatClientDlg(CWnd* pParent = NULL);	// 표준 생성자입니다.
+	int ButtonState;
 
 // 대화 상자 데이터입니다.
 #ifdef AFX_DESIGN_TIME
@@ -42,7 +43,8 @@ public:
 	class CMyDialog *m_dialog;
 	class puzzle_gameDlg *m_dialog2;
 	virtual void OnOK();
-	afx_msg void OnBnClickedButton3();
+	afx_msg void OnBnClickedButtonPuzzle();
 	afx_msg void OnBnClickedButton2();
 	afx_msg void OnBnClickedButtonOmok();
+	int myButton;
 };

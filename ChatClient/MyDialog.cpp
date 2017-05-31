@@ -6,6 +6,8 @@
 #include "MyDialog.h"
 #include "afxdialogex.h"
 #include "SocCom.h"
+#include "OmokWnd.h"
+#include "ChatClientDlg.h"
 #pragma warning (disable : 4996)
 
 // CMyDialog 대화 상자입니다.
@@ -16,7 +18,8 @@ CMyDialog::CMyDialog(CWnd* pParent /*=NULL*/)
 	: CDialogEx(IDD_DIALOG1, pParent)
 	, m_strSend(_T(""))
 {
-
+	CChatClientDlg *cchatclientdlg = (CChatClientDlg*)CWnd::FindWindow(L"#32770", L"Chatserver"); // 버튼 종류 정보 가져오기
+	getStateNum = cchatclientdlg->ButtonState;
 }
 
 CMyDialog::~CMyDialog()
@@ -95,38 +98,47 @@ BOOL CMyDialog::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 
-	// TODO:  여기에 추가 초기화 작업을 추가합니다.
-	ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX);
-	ASSERT(IDM_ABOUTBOX < 0xF000);
+	if (getStateNum == 1) {
+		// TODO:  여기에 추가 초기화 작업을 추가합니다.
+		ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX);
+		ASSERT(IDM_ABOUTBOX < 0xF000);
 
-	CMenu* pSysMenu = GetSystemMenu(FALSE);
-	if (pSysMenu != NULL)
-	{
-		BOOL bNameValid;
-		CString strAboutMenu;
-		bNameValid = strAboutMenu.LoadString(IDS_ABOUTBOX);
-		ASSERT(bNameValid);
-		if (!strAboutMenu.IsEmpty())
+		CMenu* pSysMenu = GetSystemMenu(FALSE);
+		if (pSysMenu != NULL)
 		{
-			pSysMenu->AppendMenu(MF_SEPARATOR);
-			pSysMenu->AppendMenu(MF_STRING, IDM_ABOUTBOX, strAboutMenu);
+			BOOL bNameValid;
+			CString strAboutMenu;
+			bNameValid = strAboutMenu.LoadString(IDS_ABOUTBOX);
+			ASSERT(bNameValid);
+			if (!strAboutMenu.IsEmpty())
+			{
+				pSysMenu->AppendMenu(MF_SEPARATOR);
+				pSysMenu->AppendMenu(MF_STRING, IDM_ABOUTBOX, strAboutMenu);
+			}
+
+			m_bitMain.LoadBitmapW(IDB_350);
+			//m_bitMain이라는 비트맵형 변수에 IDB_MAIN이라는 리소스를 사용하도록 한다
+
 		}
 
-		m_bitMain.LoadBitmapW(IDB_350);
-		//m_bitMain이라는 비트맵형 변수에 IDB_MAIN이라는 리소스를 사용하도록 한다
-		
-	}
+		if (!AfxSocketInit()) {
+			//		AfxMessageBox(IDP_SOCKETS_INIT_FAILED);
+			return false;
+		}
+		m_time = 20;
+		InitGame();
+		start_game = true;
 
-	if (!AfxSocketInit()) {
-		//		AfxMessageBox(IDP_SOCKETS_INIT_FAILED);
-		return false;
+		return TRUE;  // return TRUE unless you set the focus to a control
+					  // 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
 	}
-	m_time = 20;
-	InitGame();
-	start_game = true;
+	else if (getStateNum == 2) {
+		// 메모리 할당하기
+		this->omokWnd = new OmokWnd;
 
-	return TRUE;  // return TRUE unless you set the focus to a control
-				  // 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
+		this->omokWnd->Create(NULL, _T("오목"), WS_CHILD | WS_VISIBLE, CRect(0, 0, 750, 650), this, 10000);
+		return FALSE;
+	}
 }
 
 
