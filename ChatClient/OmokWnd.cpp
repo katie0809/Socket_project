@@ -1,6 +1,9 @@
 
 
+
 #include "OmokWnd.h"
+#include "OmokDlg.h"
+
 
 BEGIN_MESSAGE_MAP(OmokWnd,CWnd)
 	ON_WM_CREATE()
@@ -27,6 +30,7 @@ void OmokWnd::OnLButtonUp(UINT nFlags, CPoint point) {
 	if (x >= 50 && x <= 625 && y >= 50 && y <= 625) {
 		OmokInner();
 	}
+
 	this->Invalidate();
 
 
@@ -93,13 +97,18 @@ void OmokWnd::OnPaint() {
 			}
 		}
 	}
-
+	int result;
 	if (whoWin != 0) {
 		if (whoWin == 1) {
 			pDC->TextOut(400, 0, "Èæ ½Â¸®");
+			result=AfxMessageBox(_T("Èæ ½Â¸®ÀÔ´Ï´Ù."), MB_OK);
+
+
 		}
 		else if (whoWin == 2) {
 			pDC->TextOut(400, 0, "¹é ½Â¸®");
+			result=AfxMessageBox(_T("¹é ½Â¸®ÀÔ´Ï´Ù."), MB_OK);
+
 		}
 	}
 	
@@ -126,10 +135,21 @@ void OmokWnd::OmokInner() {
 		// Èæ:1  ¹é:2  ºó°ø°£:0
 		if (turn % 2 == 1) { //Èæ
 			getDoll[tempX][tempY] = 1;
+			sendState = 1;
 		}
 		else {//¹é
 			getDoll[tempX][tempY] = 2;
+			sendState = 2;
 		}
+
+		sendX = tempX;
+		sendY = tempY;
+
+		CString temp;
+		temp.Format(L"%d~%d~%d", this->x, this->y, this->sendState);
+
+		this->parent->SendData(0,temp);
+
 
 		// °ÔÀÓÀÌ ³¡³µ´ÂÁö È®ÀÎ
 		
@@ -169,6 +189,8 @@ void OmokWnd::OmokInner() {
 
 int OmokWnd::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 	CWnd::OnCreate(lpCreateStruct);
+
+	this->parent = (OmokDlg*)CWnd::FindWindow(_T("#32770"), _T("¿À¸ñ"));
 	return 0;
 }
 

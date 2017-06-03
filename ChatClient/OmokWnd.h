@@ -2,10 +2,9 @@
 
 #ifndef _OMOKWND_H
 #define _OMOKWND_H
-
 #include<afxwin.h>
 
-
+class OmokDlg;
 class OmokWnd : public CWnd {
 public:
 	OmokWnd();
@@ -13,6 +12,9 @@ public:
 	int getDoll[11][11];
 	int turn;
 	int whoWin; // 게임이 끝났는지 확인
+	int sendX, sendY, sendState;
+public:
+	OmokDlg *parent;
 public:
 	void OmokInner();
 	void Reset();

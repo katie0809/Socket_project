@@ -212,15 +212,15 @@ void CChatClientDlg::OnBnClickedButton2()
 
 void CChatClientDlg::OnBnClickedButtonOmok()
 {
-	ButtonState = 2;
-	m_dialog = new CMyDialog(this);
-	m_dialog->Create(CMyDialog::IDD);
-	m_dialog->ShowWindow(SW_SHOW);
+	//ButtonState = 2;
+	//m_dialog = new CMyDialog(this);
+	//m_dialog->Create(CMyDialog::IDD);
+	//m_dialog->ShowWindow(SW_SHOW);
 	
-	//OmokDlg omokDlg;
-	//this->ShowWindow(SW_HIDE);
+	OmokDlg omokDlg;
+	this->ShowWindow(SW_HIDE);
 
-	//omokDlg.DoModal();
-	//this->ShowWindow(SW_SHOW);
+	omokDlg.DoModal();
+	this->ShowWindow(SW_SHOW);
 
 }

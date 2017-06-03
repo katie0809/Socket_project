@@ -70,7 +70,7 @@ LPARAM CMyDialog::OnAccept(UINT wParam, LPARAM lParam)
 
 }
 
-void CMyDialog::OnBnClickedButton1()
+void CMyDialog::OnBnClickedButton1()//서버생성버튼
 {
 	//서버에 접속합니다
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.

@@ -1,4 +1,7 @@
 #pragma once
+
+#ifndef _SOCSERVER_H
+#define _SOCSERVER_H
 #include "SocCom.h"
 // CSocServer 명령 대상입니다.
 
@@ -20,5 +23,8 @@ public:
 		return &m_socCom;
 	}
 };
+
+
+#endif //_SOCSERVER_H
 
 

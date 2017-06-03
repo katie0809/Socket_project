@@ -2,6 +2,10 @@
 
 // CSocCom 명령 대상입니다.
 
+#ifndef _SOCCOM_H
+#define _SOCCOM_H
+
+#include <afxsock.h>
 class CSocCom : public CSocket
 {
 public:
@@ -12,4 +16,4 @@ public:
 	virtual void OnReceive(int nErrorCode);
 };
 
-
+#endif //_SOCCOM_H
